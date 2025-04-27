@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .navbar {
+            background-color: #af0707;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: white;
+            color: #af0707;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #af0707;
+        }
+        .contact-card {
+            background: #f9f9f9;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-card h3 {
+            margin: 0 0 5px 0;
+            color: #2a4d8f;
+        }
+        .contact-card p {
+            margin: 5px 0;
+        }
+        form {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+        }
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        form input, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #af0707;
+            color: white;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #941414;
+        }
+        .admin-login {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .admin-login label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .admin-login input, .admin-login button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .admin-login button {
+            background-color: #af0707;
+            color: white;
+            cursor: pointer;
+        }
+        .admin-login button:hover {
+            background-color: #941414;
+        }
+        footer {
+            background-color: #af0707;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="http://127.0.0.1:5500/my%20web%20page%201.html">Home</a>
+        <a href="contacts.html">Contact Us</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Contact Information</h1>
+        
+        <!-- Existing Contacts -->
+        <div id="contacts-list">
+            <div class="contact-card">
+                <h3>Headmaster</h3>
+                <p id="headmaster-phone">Phone: +250 788 123 456</p>
+                <p id="headmaster-email">Email: headmaster@gsgihundwe.rw</p>
+            </div>
+            <div class="contact-card">
+                <h3>Director of Studies (DOS)</h3>
+                <p id="dos-phone">Phone: +250 788 654 321</p>
+                <p id="dos-email">Email: dos@gsgihundwe.rw</p>
+            </div>
+            <div class="contact-card">
+                <h3>Discipline Officer (DOD)</h3>
+                <p id="dod-phone">Phone: +250 788 987 654</p>
+                <p id="dod-email">Email: dod@gsgihundwe.rw</p>
+            </div>
+            <div class="contact-card">
+                <h3>Secretary</h3>
+                <p id="secretary-phone">Phone: +250 788 456 789</p>
+                <p id="secretary-email">Email: secretary@gsgihundwe.rw</p>
+            </div>
+            <div class="contact-card">
+                <h3>Accountant</h3>
+                <p id="accountant-phone">Phone: +250 788 321 654</p>
+                <p id="accountant-email">Email: accountant@gsgihundwe.rw</p>
+            </div>
+        </div>
+
+        <!-- Form for Administrators -->
+        <form id="update-form">
+            <h3>Update Contact Information</h3>
+            <label for="role">Role (e.g., Headmaster, DOS, etc.):</label>
+            <input type="text" id="role" placeholder="Enter role" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" placeholder="Enter phone number" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" placeholder="Enter email address" required>
+
+            <button type="submit">Update</button>
+        </form>
+
+        <!-- Login for Administrators -->
+        <div id="admin-login" class="admin-login">
+            <h3>Update contact</h3>
+            <label for="admin-password">Enter Password to Update Contacts:</label>
+            <input type="password" id="admin-password" placeholder="Enter password to Update Contacts">
+            <button id="login-button">Login And Update</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 GS Gihundwe School. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle admin login and display the form
+        const adminPassword = "ARISTIDE"; // Set your password here
+        const loginButton = document.getElementById("login-button");
+        const adminLogin = document.getElementById("admin-login");
+        const updateForm = document.getElementById("update-form");
+
+        loginButton.addEventListener("click", function () {
+            const enteredPassword = document.getElementById("admin-password").value;
+            if (enteredPassword === adminPassword) {
+                adminLogin.style.display = "none"; // Hide login form
+                updateForm.style.display = "block"; // Show update form
+            } else {
+                alert("Incorrect password. Access denied.");
+            }
+        });
+
+        // JavaScript to update contacts dynamically
+        const form = document.getElementById('update-form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get the form values
+            const role = document.getElementById('role').value.toLowerCase();
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+
+            // Update the corresponding contact
+            if (role === 'headmaster') {
+                document.getElementById('headmaster-phone').textContent = `Phone: ${phone}`;
+                document.getElementById('headmaster-email').textContent = `Email: ${email}`;
+            } else if (role === 'dos') {
+                document.getElementById('dos-phone').textContent = `Phone: ${phone}`;
+                document.getElementById('dos-email').textContent = `Email: ${email}`;
+            } else if (role === 'dod') {
+                document.getElementById('dod-phone').textContent = `Phone: ${phone}`;
+                document.getElementById('dod-email').textContent = `Email: ${email}`;
+            } else if (role === 'secretary') {
+                document.getElementById('secretary-phone').textContent = `Phone: ${phone}`;
+                document.getElementById('secretary-email').textContent = `Email: ${email}`;
+            } else if (role === 'accountant') {
+                document.getElementById('accountant-phone').textContent = `Phone: ${phone}`;
+                document.getElementById('accountant-email').textContent = `Email: ${email}`;
+            } else {
+                alert('Role not found!');
+            }
+
+            // Clear the form
+            form.reset();
+        });
+    </script>
+
+</body>
+</html>

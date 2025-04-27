@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Website</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #af0707;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: white;
+            color: #af0707;
+            border-radius: 5px;
+        }
+
+        /* Header styling */
+        header {
+            text-align: center;
+            background: linear-gradient(to bottom, #d4edfc, #f4f4f9);
+            color: #2a4d8f;
+            padding: 50px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        /* Main section styling */
+        .main-content {
+            flex: 1;
+            text-align: center;
+        }
+
+        .main-content img {
+            display: block;
+            margin: 20px auto;
+            width: 50%;
+            border: 3px solid #af0707;
+            border-radius: 10px;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #af0707;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9rem;
+            position: relative;
+            bottom: 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar a {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .main-content img {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="http://127.0.0.1:5500/About%20school.html">About School</a>
+        <a href="#parent-portal">Parent Portal</a>
+        <a href="#school-life">School Life</a>
+        <a href="#announcements">Announcements</a>
+        <a href="http://127.0.0.1:5500/contacts.html">Contact Us</a>
+        <a href="http://127.0.0.1:5500/Location.html">Location</a>
+    </div>
+
+    <!-- Header -->
+    <header id="home">
+        <h1>Welcome to GS GIHUNDWE Website</h1>
+        <p>Explore all school activities and stay updated!</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <img src="Gs gihundwe.jpg" alt="">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 GS GIHUNDWE. All rights reserved.</p>
+    </footer>
+
+</body>
+</html> 

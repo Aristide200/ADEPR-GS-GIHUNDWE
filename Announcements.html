@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .navbar {
+            background-color: #af0707;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: white;
+            color: #af0707;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 80px auto 20px auto; /* Adjusted margin to avoid overlap with navbar */
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #af0707;
+        }
+        .announcement-card {
+            background: #f9f9f9;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: relative;
+        }
+        .announcement-card h3 {
+            margin: 0 0 5px 0;
+            color: #2a4d8f;
+        }
+        .announcement-card p {
+            margin: 5px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #af0707;
+            color: white;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        .delete-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #af0707;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .delete-button:hover {
+            background-color: #941414;
+        }
+        form {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        form input, form textarea, form select, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #af0707;
+            color: white;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #941414;
+        }
+        .footer {
+            background-color: #af0707;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="http://127.0.0.1:5500/my%20web%20page%201.html#home">Go to Home</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Announcements</h1>
+        
+        <!-- Existing Announcements -->
+        <div id="announcements-list">
+            <!-- Announcements will be dynamically added here -->
+        </div>
+
+        <!-- Form for Adding Announcements -->
+        <form id="announcement-form">
+            <h3>Add New Announcement</h3>
+            <label for="announcement-title">Announcement Title:</label>
+            <input type="text" id="announcement-title" placeholder="Enter announcement title" required>
+
+            <label for="announcement-description">Announcement Description:</label>
+            <textarea id="announcement-description" placeholder="Enter announcement description" rows="5" required></textarea>
+
+            <label for="announcement-author">Author:</label>
+            <select id="announcement-author" required>
+                <option value="HT">HT</option>
+                <option value="DOS">DOS</option>
+                <option value="DOD">DOD</option>
+                <option value="BURSAR">BURSAR</option>
+            </select>
+
+            <button type="submit">Add Announcement</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2025 GS GIHUNDWE. All rights reserved.
+    </div>
+
+    <script>
+        // JavaScript to handle adding announcements dynamically
+        const announcementForm = document.getElementById('announcement-form');
+        const announcementsList = document.getElementById('announcements-list');
+
+        announcementForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get the form values
+            const announcementTitle = document.getElementById('announcement-title').value;
+            const announcementDescription = document.getElementById('announcement-description').value;
+            const announcementAuthor = document.getElementById('announcement-author').value;
+
+            // Create a new announcement card
+            const announcementCard = document.createElement('div');
+            announcementCard.classList.add('announcement-card');
+
+            const announcementCardTitle = document.createElement('h3');
+            announcementCardTitle.textContent = announcementTitle;
+            announcementCard.appendChild(announcementCardTitle);
+
+            const announcementCardDescription = document.createElement('p');
+            announcementCardDescription.textContent = announcementDescription;
+            announcementCard.appendChild(announcementCardDescription);
+
+            const announcementCardAuthor = document.createElement('p');
+            announcementCardAuthor.innerHTML = `Uploaded by: <span class="badge">${announcementAuthor}</span>`;
+            announcementCard.appendChild(announcementCardAuthor);
+
+            // Create a delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', function () {
+                announcementsList.removeChild(announcementCard);
+            });
+            announcementCard.appendChild(deleteButton);
+
+            // Add the new announcement card to the announcements list
+            announcementsList.appendChild(announcementCard);
+
+            // Clear the form
+            announcementForm.reset();
+        });
+    </script>
+
+</body>
+</html>

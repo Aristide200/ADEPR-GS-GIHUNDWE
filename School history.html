@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About School</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .navbar {
+            background-color: #af0707;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: white;
+            color: #af0707;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 80px auto 20px auto; /* Adjusted margin to avoid overlap with navbar */
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #af0707;
+        }
+        .event-card {
+            background: #f9f9f9;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: relative;
+        }
+        .event-card h3 {
+            margin: 0 0 5px 0;
+            color: #2a4d8f;
+        }
+        .event-card p {
+            margin: 5px 0;
+        }
+        .event-card img {
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .delete-button, .edit-button {
+            position: absolute;
+            top: 10px;
+            background-color: #af0707;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .delete-button {
+            right: 10px;
+        }
+        .edit-button {
+            right: 80px;
+        }
+        .delete-button:hover, .edit-button:hover {
+            background-color: #941414;
+        }
+        form {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #af0707;
+            color: white;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #941414;
+        }
+        .footer {
+            background-color: #af0707;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="http://127.0.0.1:5500/my%20web%20page%201.html#home">Go to Home</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>School History</h1>
+        
+        <!-- Existing Events -->
+        <div id="events-list">
+            <!-- Events will be dynamically added here -->
+        </div>
+
+        <!-- Form for Adding Events -->
+        <form id="event-form">
+            <h3>Add New Event</h3>
+            <label for="event-title">Event Title:</label>
+            <input type="text" id="event-title" placeholder="Enter event title" required>
+
+            <label for="event-description">Event Description:</label>
+            <textarea id="event-description" placeholder="Enter event description" rows="5" required></textarea>
+
+            <label for="event-image">Event Image:</label>
+            <input type="file" id="event-image" accept="image/*" required>
+
+            <button type="submit">Add Event</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2025 GS GIHUNDWE. All rights reserved.
+    </div>
+
+    <script>
+        // JavaScript to handle adding events dynamically
+        const eventForm = document.getElementById('event-form');
+        const eventsList = document.getElementById('events-list');
+
+        eventForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get the form values
+            const eventTitle = document.getElementById('event-title').value;
+            const eventDescription = document.getElementById('event-description').value;
+            const eventImage = document.getElementById('event-image').files[0];
+
+            // Create a new event card
+            const eventCard = document.createElement('div');
+            eventCard.classList.add('event-card');
+
+            const eventCardTitle = document.createElement('h3');
+            eventCardTitle.textContent = eventTitle;
+            eventCard.appendChild(eventCardTitle);
+
+            const eventCardDescription = document.createElement('p');
+            eventCardDescription.textContent = eventDescription;
+            eventCard.appendChild(eventCardDescription);
+
+            if (eventImage) {
+                const eventCardImage = document.createElement('img');
+                eventCardImage.src = URL.createObjectURL(eventImage);
+                eventCardImage.alt = eventTitle;
+                eventCardImage.style.width = '100%';
+                eventCardImage.style.borderRadius = '5px';
+                eventCardImage.style.marginTop = '10px';
+                eventCard.appendChild(eventCardImage);
+            }
+
+            // Create a delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', function () {
+                eventsList.removeChild(eventCard);
+            });
+            eventCard.appendChild(deleteButton);
+
+            // Create an edit button
+            const editButton = document.createElement('button');
+            editButton.classList.add('edit-button');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', function () {
+                document.getElementById('event-title').value = eventTitle;
+                document.getElementById('event-description').value = eventDescription;
+                eventsList.removeChild(eventCard);
+            });
+            eventCard.appendChild(editButton);
+
+            // Add the new event card to the events list
+            eventsList.appendChild(eventCard);
+
+            // Clear the form
+            eventForm.reset();
+        });
+    </script>
+
+</body>
+</html>

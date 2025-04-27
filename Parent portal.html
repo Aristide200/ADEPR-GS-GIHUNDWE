@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 10px;
+            width: 100%;
+            background: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .message .author {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+        .message .content {
+            margin-bottom: 10px;
+        }
+        .message .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .message .actions button {
+            background: #ff4d4d;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .message .actions button:hover {
+            background: #cc0000;
+        }
+        .message .actions .reply {
+            background: #007bff;
+        }
+        .message .actions .reply:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Public Chat</h2>
+        <div id="chat-box">
+            <!-- Chat messages will appear here dynamically -->
+        </div>
+        <textarea id="author-name" placeholder="Enter your name..."></textarea>
+        <textarea id="message-input" placeholder="Type your message here..." rows="3"></textarea>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const authorInput = document.getElementById('author-name');
+            const chatBox = document.getElementById('chat-box');
+            const message = input.value.trim();
+            const author = authorInput.value.trim();
+
+            if (!author) {
+                alert('Please enter your name before sending a message.');
+                return;
+            }
+
+            if (message) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+
+                const authorElement = document.createElement('div');
+                authorElement.textContent = author;
+                authorElement.classList.add('author');
+
+                const contentElement = document.createElement('div');
+                contentElement.textContent = message;
+                contentElement.classList.add('content');
+
+                const actionsElement = document.createElement('div');
+                actionsElement.classList.add('actions');
+
+                const likeButton = document.createElement('button');
+                likeButton.textContent = '❤️ 0';
+                likeButton.onclick = function () {
+                    const currentCount = parseInt(likeButton.textContent.split(' ')[1]);
+                    likeButton.textContent = `❤️ ${currentCount + 1}`;
+                };
+
+                const replyButton = document.createElement('button');
+                replyButton.textContent = 'Reply';
+                replyButton.classList.add('reply');
+                replyButton.onclick = function () {
+                    const replyInput = document.createElement('textarea');
+                    replyInput.placeholder = 'Type your reply here...';
+                    replyInput.style.width = '100%';
+                    replyInput.style.marginTop = '10px';
+
+                    const sendReplyButton = document.createElement('button');
+                    sendReplyButton.textContent = 'Send Reply';
+                    sendReplyButton.style.marginTop = '10px';
+                    sendReplyButton.onclick = function () {
+                        const replyMessage = replyInput.value.trim();
+                        if (replyMessage) {
+                            const replyElement = document.createElement('div');
+                            replyElement.textContent = `${author}: ${replyMessage}`;
+                            replyElement.style.marginTop = '5px';
+                            replyElement.style.marginLeft = '20px';
+                            replyElement.style.fontStyle = 'italic';
+                            messageElement.appendChild(replyElement);
+                            replyInput.remove();
+                            sendReplyButton.remove();
+                        }
+                    };
+
+                    messageElement.appendChild(replyInput);
+                    messageElement.appendChild(sendReplyButton);
+                };
+
+                actionsElement.appendChild(likeButton);
+                actionsElement.appendChild(replyButton);
+
+                messageElement.appendChild(authorElement);
+                messageElement.appendChild(contentElement);
+                messageElement.appendChild(actionsElement);
+                chatBox.appendChild(messageElement);
+
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
